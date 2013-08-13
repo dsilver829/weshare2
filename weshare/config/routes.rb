@@ -1,4 +1,7 @@
 Weshare::Application.routes.draw do
+  resources :items
+
+
   root :to => 'users#index'
 
   devise_for :users

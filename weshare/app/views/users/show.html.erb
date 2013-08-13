@@ -15,6 +15,16 @@
   <%= @user.address %>
 </p>
 
+<p>
+  <b>Items:</b>
+  <ul>
+    <% @user.items.each do |item| %>
+      <li><%= item.name %></li>
+    <% end %>
+  </ul>
+  <%= link_to 'Add an Item', new_item_path %>
+</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
