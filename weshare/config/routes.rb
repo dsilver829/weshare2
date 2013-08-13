@@ -1,4 +1,19 @@
 Weshare::Application.routes.draw do
+  root :to => 'users#index'
+
+  devise_for :users
+
+  devise_scope :user do
+      get '/sign_up'      => 'devise/registrations#new'
+      get '/sign_in'      => 'devise/sessions#new'
+      get '/sign_out'     => 'devise/sessions#destroy'
+      get '/confirmation_instructions' => 'devise/confirmations#instructions'
+      match '/dashboard'  => 'dashboards#show', :as => :user_root
+  end
+
+  resources :users
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +63,6 @@ Weshare::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
