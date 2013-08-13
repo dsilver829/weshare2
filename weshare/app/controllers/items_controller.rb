@@ -25,6 +25,7 @@ class ItemsController < ApplicationController
   # GET /items/new.json
   def new
     @item = Item.new
+    @user = User.find(params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +41,11 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(params[:item])
+    @user = User.find(params[:item][:user_id])
+    params[:user_id] = nil
+    @item = @user.items.create(params[:item])
+
+    @item.image = params[:item][:image]
 
     respond_to do |format|
       if @item.save
